@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глоссарий Game Core</title>
+  <style>
+    :root {
+      --bg-color: #f7f7f7;
+      --text-color: #333;
+      --card-bg: #fff;
+      --border-color: #ddd;
+    }
+    .dark-theme {
+      --bg-color: #1e1e1e;
+      --text-color: #f5f5f5;
+      --card-bg: #2c2c2c;
+      --border-color: #444;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .search-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search-container input {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      width: 60%;
+      max-width: 400px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+    .toggle-theme {
+      display: block;
+      margin: 0 auto 2rem;
+      background: none;
+      border: 2px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-color);
+      background-color: var(--card-bg);
+    }
+    .category {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+    .term {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+    .term h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+    .term p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Глоссарий Game Core</h1>
+
+  <button class="toggle-theme" onclick="toggleTheme()">Переключить тему</button>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" onkeyup="filterTerms()" placeholder="Поиск по терминам...">
+  </div>
+
+  <div class="category">🧩 Процессы и планирование</div>
+
+  <div class="term">
+    <h2>Декомпозиция</h2>
+    <p>Разбиение большой задачи на подзадачи для упрощения реализации и оценки.</p>
+  </div>
+
+  <div class="term">
+    <h2>R&D (Research & Development)</h2>
+    <p>Исследование или изучение новой технологии без гарантированного результата.</p>
+  </div>
+
+  <div class="term">
+    <h2>Эстимейт</h2>
+    <p>Оценка трудозатрат или времени на выполнение задачи.</p>
+  </div>
+
+  <div class="category">🚨 Приоритеты и критичность задач</div>
+
+  <div class="term">
+    <h2>Critical</h2>
+    <p>Критическая задача или баг, блокирующая основной функционал.</p>
+  </div>
+  <div class="term">
+    <h2>High</h2>
+    <p>Важная задача, требующая внимания в ближайшее время.</p>
+  </div>
+  <div class="term">
+    <h2>Normal</h2>
+    <p>Задача со стандартным приоритетом.</p>
+  </div>
+  <div class="term">
+    <h2>Low</h2>
+    <p>Низкий приоритет, можно отложить.</p>
+  </div>
+  <div class="term">
+    <h2>Minor</h2>
+    <p>Незначительная проблема или баг, не влияющий на игру.</p>
+  </div>
+
+  <script>
+    function filterTerms() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const terms = document.getElementsByClassName('term');
+
+      for (let i = 0; i < terms.length; i++) {
+        const termTitle = terms[i].getElementsByTagName('h2')[0];
+        const termText = terms[i].getElementsByTagName('p')[0];
+        const content = termTitle.textContent + ' ' + termText.textContent;
+        if (content.toLowerCase().includes(filter)) {
+          terms[i].style.display = '';
+        } else {
+          terms[i].style.display = 'none';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+    }
+  </script>
+
+</body>
+</html>
